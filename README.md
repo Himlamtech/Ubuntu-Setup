@@ -1,72 +1,20 @@
-# 🐧 Ubuntu 22.04 LTS Complete Setup Guide
+# Ubuntu Setup
 
-> **System Information:** Ubuntu 22.04 LTS | Username: `lam` | Password: `1`
-
-This comprehensive guide will help you set up a fresh Ubuntu 22.04 system with all essential tools, applications, and configurations for development and daily use.
-
-## 📋 Table of Contents
-
-1. [Prerequisites & Downloads](#1-prerequisites--downloads)
-2. [Shell Configuration & Aliases](#2-shell-configuration--aliases)
-3. [Git Configuration & SSH Setup](#3-git-configuration--ssh-setup)
-4. [Mount Additional Storage Drives](#4-mount-additional-storage-drives)
-5. [Essential Software Installation](#5-essential-software-installation)
-6. [System Verification](#6-system-verification)
-
----
-
-## 1. Prerequisites & Downloads
-
-### 📦 Download Required Applications
-Access the shared drive containing essential installation files:
-
-**[📁 Drive Link](https://drive.google.com/drive/folders/1vBeH9BclR4kRVLHKMCv8MInC4D85UiVD?usp=sharing)**
-
-> **Note:** Download any specific `.deb` packages or installers from this drive before proceeding.
-
----
-
-## 2. Shell Configuration & Aliases
-
-### 🔧 Configure Bash Aliases and Functions
-
-Add the following configuration to your `.bashrc` file to enhance your command-line experience:
+## 1. Initial Setup
 
 ```bash
-# Open bashrc for editing
 nano ~/.bashrc
-
-# Add the following content to the end of the file:
-
-# ============================================
-# CUSTOM BASH CONFIGURATION
-# ============================================
-
-# === Conda utility functions ===
-function acti() {
-    conda activate "$1"
-}
-
-function deacti() {
-    conda deactivate
-}
-
-function create() {
-    python_version="${2:-3.10}"  # Default to Python 3.10 if no version is given
-    conda create --name "$1" python="$python_version" -y
-}
-
-# === Common aliases ===
+```
+```bash
 alias py='python3'
 alias pipall='pip install -r requirements.txt'
-alias venv='python3 -m venv venv && source venv/bin/activate'
+alias venv='source venv/bin/activate'
 alias down='cd ~/Downloads'
 alias cls='clear'
 alias cleanup='sudo apt autoremove -y && sudo apt clean'
 alias update='sudo apt update && sudo apt upgrade -y'
 alias fixbroken='sudo apt --fix-broken install'
 
-# === Git helper function ===
 function gitupdate() {
     if [ -z "$1" ] || [ -z "$2" ]; then
         echo "Usage: gitupdate \"commit message\" branch-name"
@@ -77,25 +25,8 @@ function gitupdate() {
     git commit -m "$1"
     git push -u origin "$2" -f
 }
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/lam/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/lam/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/lam/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/lam/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
 ```
-
-### 🔄 Apply Changes
 ```bash
-# Reload bashrc to apply changes
 source ~/.bashrc
 ```
 
@@ -106,14 +37,11 @@ source ~/.bashrc
 ### 🔐 Configure Git Global Settings
 
 ```bash
-# Set global Git configuration
 git config --global user.name "Himlamtech"
 git config --global user.email "hailam04.work@gmail.com"
 
-# Generate SSH key for GitHub authentication
 ssh-keygen -t ed25519 -C "hailam04.work@gmail.com"
 
-# Enable credential storage
 git config --global credential.helper store
 ```
 
