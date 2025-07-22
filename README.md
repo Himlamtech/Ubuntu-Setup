@@ -8,7 +8,7 @@ nano ~/.bashrc
 ```bash
 alias py='python3'
 alias pipall='pip install -r requirements.txt'
-alias venv='source venv/bin/activate'
+alias venv='source .venv/bin/activate'
 alias down='cd ~/Downloads'
 alias cls='clear'
 alias cleanup='sudo apt autoremove -y && sudo apt clean'
@@ -37,7 +37,7 @@ source ~/.bashrc
 ### 🔐 Configure Git Global Settings
 
 ```bash
-git config --global user.name "Himlamtech"
+git config --global user.name "HimLamTech"
 git config --global user.email "hailam04.work@gmail.com"
 
 ssh-keygen -t ed25519 -C "hailam04.work@gmail.com"
